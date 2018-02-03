@@ -1,0 +1,2124 @@
+{
+  "frame_types": [
+    {
+      "type": "Position",
+      "id": 1,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "longitude",
+              "format": "Double",
+              "transformation": "degrees"
+            },
+            {
+              "name": "latitude",
+              "format": "Double",
+              "transformation": "degrees"
+            },
+            {
+              "name": "ascent",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              },
+              "comment": "called height by dji-log-parser"
+            },
+            {
+              "name": "x_speed",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "y_speed",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "z_speed",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "pitch",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "roll",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "yaw",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_then_modulo",
+                "values": [
+                  10,
+                  360
+                ]
+              }
+            },
+            {
+              "name": "fly_c_state",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "rc_state",
+                  "bits": 7,
+                  "transformation": "equals_0"
+                },
+                {
+                  "name": "fly_c_state",
+                  "bits": {
+                    "start": 0,
+                    "end": 7
+                  },
+                  "type": "enum",
+                  "enum_name": "fly_c_state"
+                }
+              ]
+            },
+            {
+              "name": "app_command",
+              "format": "U8"
+            },
+            {
+              "name": "status",
+              "format": "U32",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "can_ioc_work",
+                  "bits": 0,
+                  "type": "bool"
+                },
+                {
+                  "name": "ground_or_sky",
+                  "bits": {
+                    "start": 1,
+                    "end": 2
+                  }
+                },
+                {
+                  "name": "is_motor_up",
+                  "bits": 3,
+                  "type": "bool"
+                },
+                {
+                  "name": "is_swave_work",
+                  "bits": 4,
+                  "tranformation": "neq_0"
+                },
+                {
+                  "name": "go_home_status",
+                  "bits": {
+                    "start": 5,
+                    "end": 7
+                  },
+                  "type": "enum",
+                  "enum_name": "go_home_status"
+                },
+                {
+                  "name": "is_vision_used",
+                  "bits": 8,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "voltage_warning",
+                  "bits": {
+                    "start": 9,
+                    "end": 10
+                  }
+                },
+                {
+                  "name": "is_imu_preheated",
+                  "bits": 12,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "mode_channel",
+                  "bits": {
+                    "start": 13,
+                    "end": 14
+                  }
+                },
+                {
+                  "name": "compass_error",
+                  "bits": 16,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "wave_error",
+                  "bits": 17,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "gps_level",
+                  "bits": {
+                    "start": 18,
+                    "end": 21
+                  }
+                },
+                {
+                  "name": "battery_type",
+                  "bits": {
+                    "start": 22,
+                    "end": 23
+                  },
+                  "type": "enum",
+                  "enum_name": "battery_type"
+                },
+                {
+                  "name": "accelerator_over_range",
+                  "bits": 24,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "vibrating",
+                  "bits": 25,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "barometer_dead_in_air",
+                  "bits": 26,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "motor_blocked",
+                  "bits": 27,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "not_enough_force",
+                  "bits": 28,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "propeller_catapult",
+                  "bits": 29,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "go_home_height_modified",
+                  "bits": 30,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "out_of_limit",
+                  "bits": 31,
+                  "transformation": "bool"
+                }
+              ]
+            },
+            {
+              "name": "satellites",
+              "format": "U8"
+            },
+            {
+              "name": "flight_action",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "flight_action"
+            },
+            {
+              "name": "motor_start_failed_cause",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "motor_start_failed_cause"
+            },
+            {
+              "name": "non_gps_cause",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "non_gps_cause",
+                  "bits": {
+                    "start": 0,
+                    "end": 3
+                  },
+                  "type": "enum",
+                  "enum_name": "non_gps_cause"
+                },
+                {
+                  "name": "waypoint_limit_mode",
+                  "bits": 16,
+                  "type": "bool"
+                }
+              ]
+            },
+            {
+              "name": "battery",
+              "format": "U8",
+              "comment": "Read as an int but only 1 byte used?  Maybe supposed to be an S8?"
+            },
+            {
+              "name": "s_wave_height",
+              "format": "U8"
+            },
+            {
+              "name": "fly_time",
+              "format": "U16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10
+                ]
+              }
+            },
+            {
+              "name": "motor_revolution",
+              "format": "U8"
+            },
+            {
+              "unknown": "true",
+              "comment": "dji-log-parser skips from byte 44 to byte 47",
+              "format": "U8"
+            },
+            {
+              "unknown": "true",
+              "comment": "dji-log-parser skips from byte 44 to byte 47",
+              "format": "U8"
+            },
+            {
+              "unknown": "true",
+              "comment": "dji-log-parser skips from byte 44 to byte 47",
+              "format": "U8"
+            },
+            {
+              "name": "drone_type",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "drone_type"
+            },
+            {
+              "name": "imu_init_fail_reason",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "imu_init_fail_reason"
+            },
+            {
+              "name": "motor_fail_reason",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "motor_fail_reason"
+            },
+            {
+              "name": "sdk_control_device",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "sdk_control_device"
+            }
+          ]
+        }
+      ],
+      "enums": {
+        "fly_c_state": {
+          "values": [
+            {
+              "value": 0,
+              "name": "MANUAL"
+            },
+            {
+              "value": 1,
+              "name": "ATTI"
+            },
+            {
+              "value": 2,
+              "name": "ATTI_COURSE_LOCK"
+            },
+            {
+              "value": 3,
+              "name": "ATTI_HOVER"
+            },
+            {
+              "value": 4,
+              "name": "HOVER"
+            },
+            {
+              "value": 5,
+              "name": "GSP_BLAKE"
+            },
+            {
+              "value": 6,
+              "name": "GPS_ATTI"
+            },
+            {
+              "value": 7,
+              "name": "GPS_COURSE_LOCK"
+            },
+            {
+              "value": 8,
+              "name": "GPS_HOME_LOCK"
+            },
+            {
+              "value": 9,
+              "name": "GPS_HOT_POINT"
+            },
+            {
+              "value": 10,
+              "name": "ASSISTED_TAKEOFF"
+            },
+            {
+              "value": 11,
+              "name": "AUTO_TAKEOFF"
+            },
+            {
+              "value": 12,
+              "name": "AUTO_LANDING"
+            },
+            {
+              "value": 13,
+              "name": "ATTI_LANDING"
+            },
+            {
+              "value": 14,
+              "name": "GPS_WAYPOINT"
+            },
+            {
+              "value": 15,
+              "name": "GO_HOME"
+            },
+            {
+              "value": 16,
+              "name": "CLICK_GO"
+            },
+            {
+              "value": 17,
+              "name": "JOYSTICK"
+            },
+            {
+              "value": 18,
+              "name": "GPS_ATTI_WRISTBAND"
+            },
+            {
+              "value": 19,
+              "name": "CINEMATIC"
+            },
+            {
+              "value": 23,
+              "name": "ATTI_LIMITED"
+            },
+            {
+              "value": 24,
+              "name": "DRAW"
+            },
+            {
+              "value": 25,
+              "name": "GPS_FOLLOW_ME"
+            },
+            {
+              "value": 26,
+              "name": "ACTIVE_TRACK"
+            },
+            {
+              "value": 27,
+              "name": "TAP_FLY"
+            },
+            {
+              "value": 28,
+              "name": "PANO"
+            },
+            {
+              "value": 29,
+              "name": "FARMING"
+            },
+            {
+              "value": 30,
+              "name": "FPV"
+            },
+            {
+              "value": 31,
+              "name": "GPS_SPORT"
+            },
+            {
+              "value": 32,
+              "name": "GPS_NOVICE"
+            },
+            {
+              "value": 33,
+              "name": "CONFIRM_LANDING"
+            },
+            {
+              "value": 35,
+              "name": "TERRAIN_FOLLOW"
+            },
+            {
+              "value": 36,
+              "name": "PALM_CONTROL"
+            },
+            {
+              "value": 37,
+              "name": "QUICK_SHOT"
+            },
+            {
+              "value": 38,
+              "name": "TRIPOD"
+            },
+            {
+              "value": 39,
+              "name": "TRACK_SPOTLIGHT"
+            },
+            {
+              "value": 41,
+              "name": "MOTORS_JUST_STARTED"
+            },
+            {
+              "value": 43,
+              "name": "GPS_GENTLE"
+            },
+            {
+              "value": 255,
+              "name": "UNKNOWN"
+            }
+          ]
+        },
+        "go_home_status": {
+          "values": [
+            {
+              "value": 0,
+              "name": "STANDBY"
+            },
+            {
+              "value": 1,
+              "name": "PREASCENDING"
+            },
+            {
+              "value": 2,
+              "name": "ALIGN"
+            },
+            {
+              "value": 3,
+              "name": "ASCENDING"
+            },
+            {
+              "value": 4,
+              "name": "CRUISE"
+            },
+            {
+              "value": 5,
+              "name": "BRAKING"
+            },
+            {
+              "value": 6,
+              "name": "BYPASSING"
+            },
+            {
+              "value": 7,
+              "name": "OTHER"
+            }
+          ]
+        },
+        "flight_action": {
+          "values": [
+            {
+              "value": 0,
+              "name": "NONE"
+            },
+            {
+              "value": 1,
+              "name": "WARNING_POWER_GOHOME"
+            },
+            {
+              "value": 2,
+              "name": "WARNING_POWER_LANDING"
+            },
+            {
+              "value": 3,
+              "name": "SMART_POWER_GOHOME"
+            },
+            {
+              "value": 4,
+              "name": "SMART_POWER_LANDING"
+            },
+            {
+              "value": 5,
+              "name": "LOW_VOLTAGE_LANDING"
+            },
+            {
+              "value": 6,
+              "name": "LOW_VOLTAGE_GOHOME"
+            },
+            {
+              "value": 7,
+              "name": "SERIOUS_LOW_VOLTAGE_LANDING"
+            },
+            {
+              "value": 8,
+              "name": "RC_ONEKEY_GOHOME"
+            },
+            {
+              "value": 9,
+              "name": "RC_ASSISTANT_TAKEOFF"
+            },
+            {
+              "value": 10,
+              "name": "RC_AUTO_TAKEOFF"
+            },
+            {
+              "value": 11,
+              "name": "RC_AUTO_LANDING"
+            },
+            {
+              "value": 12,
+              "name": "APP_AUTO_GOHOME"
+            },
+            {
+              "value": 13,
+              "name": "APP_AUTO_LANDING"
+            },
+            {
+              "value": 14,
+              "name": "APP_AUTO_TAKEOFF"
+            },
+            {
+              "value": 15,
+              "name": "OUTOF_CONTROL_GOHOME"
+            },
+            {
+              "value": 16,
+              "name": "API_AUTO_TAKEOFF"
+            },
+            {
+              "value": 17,
+              "name": "API_AUTO_LANDING"
+            },
+            {
+              "value": 18,
+              "name": "API_AUTO_GOHOME"
+            },
+            {
+              "value": 19,
+              "name": "AVOID_GROUND_LANDING"
+            },
+            {
+              "value": 20,
+              "name": "AIRPORT_AVOID_LANDING"
+            },
+            {
+              "value": 21,
+              "name": "TOO_CLOSE_GOHOME_LANDING"
+            },
+            {
+              "value": 22,
+              "name": "TOO_FAR_GOHOME_LANDING"
+            },
+            {
+              "value": 23,
+              "name": "APP_WP_MISSION"
+            },
+            {
+              "value": 24,
+              "name": "WP_AUTO_TAKEOFF"
+            },
+            {
+              "value": 25,
+              "name": "GOHOME_AVOID"
+            },
+            {
+              "value": 26,
+              "name": "GOHOME_FINISH"
+            },
+            {
+              "value": 27,
+              "name": "VERT_LOW_LIMIT_LANDING"
+            },
+            {
+              "value": 28,
+              "name": "BATTERY_FORCE_LANDING"
+            },
+            {
+              "value": 29,
+              "name": "MC_PROTECT_GOHOME"
+            }
+          ]
+        },
+        "motor_start_failed_cause": {
+          "default": "NONE",
+          "values": [
+            {
+              "value": 0,
+              "name": "NONE"
+            },
+            {
+              "value": 129,
+              "name": "CompassError"
+            },
+            {
+              "value": 130,
+              "name": "AssistantProtected"
+            },
+            {
+              "value": 131,
+              "name": "DeviceLocked"
+            },
+            {
+              "value": 132,
+              "name": "DistanceLimit"
+            },
+            {
+              "value": 133,
+              "name": "IMUNeedCalibration"
+            },
+            {
+              "value": 134,
+              "name": "IMUSNError"
+            },
+            {
+              "value": 135,
+              "name": "IMUWarning"
+            },
+            {
+              "value": 136,
+              "name": "CompassCalibrating"
+            },
+            {
+              "value": 137,
+              "name": "AttiError"
+            },
+            {
+              "value": 138,
+              "name": "NoviceProtected"
+            },
+            {
+              "value": 139,
+              "name": "BatteryCellError"
+            },
+            {
+              "value": 140,
+              "name": "BatteryCommuniteError"
+            },
+            {
+              "value": 141,
+              "name": "SeriouLowVoltage"
+            },
+            {
+              "value": 142,
+              "name": "SeriouLowPower"
+            },
+            {
+              "value": 143,
+              "name": "LowVoltage"
+            },
+            {
+              "value": 144,
+              "name": "TempureVolLow"
+            },
+            {
+              "value": 145,
+              "name": "SmartLowToLand"
+            },
+            {
+              "value": 146,
+              "name": "BatteryNotReady"
+            },
+            {
+              "value": 147,
+              "name": "SimulatorMode"
+            },
+            {
+              "value": 148,
+              "name": "PackMode"
+            },
+            {
+              "value": 149,
+              "name": "AttitudeAbNormal"
+            },
+            {
+              "value": 150,
+              "name": "UnActive"
+            },
+            {
+              "value": 151,
+              "name": "FlyForbiddenError"
+            },
+            {
+              "value": 152,
+              "name": "BiasError"
+            },
+            {
+              "value": 153,
+              "name": "EscError"
+            },
+            {
+              "value": 154,
+              "name": "ImuInitError"
+            },
+            {
+              "value": 155,
+              "name": "SystemUpgrade"
+            },
+            {
+              "value": 156,
+              "name": "SimulatorStarted"
+            },
+            {
+              "value": 157,
+              "name": "ImuingError"
+            },
+            {
+              "value": 158,
+              "name": "AttiAngleOver"
+            },
+            {
+              "value": 159,
+              "name": "GyroscopeError"
+            },
+            {
+              "value": 160,
+              "name": "AcceletorError"
+            },
+            {
+              "value": 161,
+              "name": "CompassFailed"
+            },
+            {
+              "value": 162,
+              "name": "BarometerError"
+            },
+            {
+              "value": 163,
+              "name": "BarometerNegative"
+            },
+            {
+              "value": 164,
+              "name": "CompassBig"
+            },
+            {
+              "value": 165,
+              "name": "GyroscopeBiasBig"
+            },
+            {
+              "value": 166,
+              "name": "AcceletorBiasBig"
+            },
+            {
+              "value": 167,
+              "name": "CompassNoiseBig"
+            },
+            {
+              "value": 168,
+              "name": "BarometerNoiseBig"
+            },
+            {
+              "value": 169,
+              "name": "InvalidSn"
+            },
+            {
+              "value": 172,
+              "name": "FLASH_OPERATING"
+            },
+            {
+              "value": 173,
+              "name": "GPS_DISCONNECT"
+            },
+            {
+              "value": 175,
+              "name": "SDCardException"
+            },
+            {
+              "value": 189,
+              "name": "IMUNoconnection"
+            },
+            {
+              "value": 190,
+              "name": "RCCalibration"
+            },
+            {
+              "value": 191,
+              "name": "RCCalibrationException"
+            },
+            {
+              "value": 192,
+              "name": "RCCalibrationUnfinished"
+            },
+            {
+              "value": 193,
+              "name": "RCCalibrationException2"
+            },
+            {
+              "value": 194,
+              "name": "RCCalibrationException3"
+            },
+            {
+              "value": 195,
+              "name": "AircraftTypeMismatch"
+            },
+            {
+              "value": 196,
+              "name": "FoundUnfinishedModule"
+            },
+            {
+              "value": 198,
+              "name": "CYRO_ABNORMAL"
+            },
+            {
+              "value": 199,
+              "name": "BARO_ABNORMAL"
+            },
+            {
+              "value": 200,
+              "name": "COMPASS_ABNORMAL"
+            },
+            {
+              "value": 201,
+              "name": "GPS_ABNORMAL"
+            },
+            {
+              "value": 202,
+              "name": "NS_ABNORMAL"
+            },
+            {
+              "value": 203,
+              "name": "TOPOLOGY_ABNORMAL"
+            },
+            {
+              "value": 204,
+              "name": "RC_NEED_CALI"
+            },
+            {
+              "value": 205,
+              "name": "INVALID_FLOAT"
+            },
+            {
+              "value": 206,
+              "name": "M600_BAT_TOO_LITTLE"
+            },
+            {
+              "value": 207,
+              "name": "M600_BAT_AUTH_ERR"
+            },
+            {
+              "value": 208,
+              "name": "M600_BAT_COMM_ERR"
+            },
+            {
+              "value": 209,
+              "name": "M600_BAT_DIF_VOLT_LARGE_1"
+            },
+            {
+              "value": 210,
+              "name": "M600_BAT_DIF_VOLT_LARGE_2"
+            },
+            {
+              "value": 211,
+              "name": "INVALID_VERSION"
+            },
+            {
+              "value": 212,
+              "name": "GIMBAL_GYRO_ABNORMAL"
+            },
+            {
+              "value": 213,
+              "name": "GIMBAL_ESC_PITCH_NON_DATA"
+            },
+            {
+              "value": 214,
+              "name": "GIMBAL_ESC_ROLL_NON_DATA"
+            },
+            {
+              "value": 215,
+              "name": "GIMBAL_ESC_YAW_NON_DATA"
+            },
+            {
+              "value": 216,
+              "name": "GIMBAL_FIRM_IS_UPDATING"
+            },
+            {
+              "value": 217,
+              "name": "GIMBAL_DISORDER"
+            },
+            {
+              "value": 218,
+              "name": "GimbalPitchShock"
+            },
+            {
+              "value": 219,
+              "name": "GimbalRollShock"
+            },
+            {
+              "value": 220,
+              "name": "GimbalYawShock"
+            },
+            {
+              "value": 221,
+              "name": "IMUcCalibrationFinished"
+            },
+            {
+              "value": 229,
+              "name": "BatVersionError"
+            },
+            {
+              "value": 230,
+              "name": "RTK_BAD_SIGNAL"
+            },
+            {
+              "value": 231,
+              "name": "RTK_DEVIATION_ERROR"
+            },
+            {
+              "value": 240,
+              "name": "ESC_CALIBRATING"
+            },
+            {
+              "value": 241,
+              "name": "GPS_SIGN_INVALID"
+            },
+            {
+              "value": 242,
+              "name": "GIMBAL_IS_CALIBRATING"
+            },
+            {
+              "value": 243,
+              "name": "LOCK_BY_APP"
+            },
+            {
+              "value": 244,
+              "name": "START_FLY_HEIGHT_ERROR"
+            },
+            {
+              "value": 245,
+              "name": "ESC_VERSION_NOT_MATCH"
+            },
+            {
+              "value": 246,
+              "name": "IMU_ORI_NOT_MATCH"
+            },
+            {
+              "value": 247,
+              "name": "STOP_BY_APP"
+            },
+            {
+              "value": 248,
+              "name": "COMPASS_IMU_ORI_NOT_MATCH"
+            }
+          ]
+        },
+        "non_gps_cause": {
+          "values": [
+            {
+              "value": 0,
+              "name": "ALREADY"
+            },
+            {
+              "value": 1,
+              "name": "FORBIN"
+            },
+            {
+              "value": 2,
+              "name": "GPSNUM_NONENOUGH"
+            },
+            {
+              "value": 3,
+              "name": "GPS_HDOP_LARGE"
+            },
+            {
+              "value": 4,
+              "name": "GPS_POSITION_NONMATCH"
+            },
+            {
+              "value": 5,
+              "name": "SPEED_ERROR_LARGE"
+            },
+            {
+              "value": 6,
+              "name": "YAW_ERROR_LARGE"
+            },
+            {
+              "value": 7,
+              "name": "COMPASS_ERROR_LARGE"
+            },
+            {
+              "value": 8,
+              "name": "UNKNOWN"
+            }
+          ]
+        },
+        "drone_type": {
+          "values": [
+            {
+              "value": 0,
+              "name": "Unknown"
+            },
+            {
+              "value": 1,
+              "name": "Inspire"
+            },
+            {
+              "value": 2,
+              "name": "P3S"
+            },
+            {
+              "value": 3,
+              "name": "P3X"
+            },
+            {
+              "value": 4,
+              "name": "P3C"
+            },
+            {
+              "value": 5,
+              "name": "OpenFrame"
+            },
+            {
+              "value": 6,
+              "name": "ACEONE"
+            },
+            {
+              "value": 7,
+              "name": "WKM"
+            },
+            {
+              "value": 8,
+              "name": "NAZA"
+            },
+            {
+              "value": 9,
+              "name": "A2"
+            },
+            {
+              "value": 10,
+              "name": "A3"
+            },
+            {
+              "value": 11,
+              "name": "P4"
+            },
+            {
+              "value": 13,
+              "name": "Mavic"
+            },
+            {
+              "value": 14,
+              "name": "PM820"
+            },
+            {
+              "value": 15,
+              "name": "P34K"
+            },
+            {
+              "value": 16,
+              "name": "wm220"
+            },
+            {
+              "value": 17,
+              "name": "Orange2"
+            },
+            {
+              "value": 18,
+              "name": "Pomato"
+            },
+            {
+              "value": 20,
+              "name": "N3"
+            },
+            {
+              "value": 23,
+              "name": "PM820PRO"
+            },
+            {
+              "value": 100,
+              "name": "NONE"
+            },
+            {
+              "value": 255,
+              "name": "NoFlyc"
+            }
+          ]
+        },
+        "imu_init_fail_reason": {
+          "values": [
+            {
+              "value": 0,
+              "name": "MONITOR_ERROR"
+            },
+            {
+              "value": 1,
+              "name": "COLLECTING_DATA"
+            },
+            {
+              "value": 2,
+              "name": "GYRO_DEAD"
+            },
+            {
+              "value": 3,
+              "name": "ACCE_DEAD"
+            },
+            {
+              "value": 4,
+              "name": "COMPASS_DEAD"
+            },
+            {
+              "value": 5,
+              "name": "BAROMETER_DEAD"
+            },
+            {
+              "value": 6,
+              "name": "BAROMETER_NEGATIVE"
+            },
+            {
+              "value": 7,
+              "name": "COMPASS_MOD_TOO_LARGE"
+            },
+            {
+              "value": 8,
+              "name": "GYRO_BIAS_TOO_LARGE"
+            },
+            {
+              "value": 9,
+              "name": "ACCE_BIAS_TOO_LARGE"
+            },
+            {
+              "value": 10,
+              "name": "COMPASS_NOISE_TOO_LARGE"
+            },
+            {
+              "value": 11,
+              "name": "BAROMETER_NOISE_TOO_LARGE"
+            },
+            {
+              "value": 12,
+              "name": "WAITING_MC_STATIONARY"
+            },
+            {
+              "value": 13,
+              "name": "ACCE_MOVE_TOO_LARGE"
+            },
+            {
+              "value": 14,
+              "name": "MC_HEADER_MOVED"
+            },
+            {
+              "value": 15,
+              "name": "MC_VIBRATED"
+            },
+            {
+              "value": 16,
+              "name": "NONE"
+            }
+          ]
+        },
+        "motor_fail_reason": {
+          "values": [
+            {
+              "value": 94,
+              "name": "TAKEOFF_EXCEPTION"
+            },
+            {
+              "value": 95,
+              "name": "ESC_STALL_NEAR_GROUND"
+            },
+            {
+              "value": 96,
+              "name": "ESC_UNBALANCE_ON_GRD"
+            },
+            {
+              "value": 97,
+              "name": "ESC_PART_EMPTY_ON_GRD"
+            },
+            {
+              "value": 98,
+              "name": "ENGINE_START_FAILED"
+            },
+            {
+              "value": 99,
+              "name": "AUTO_TAKEOFF_LANCH_FAILED"
+            },
+            {
+              "value": 100,
+              "name": "ROLL_OVER_ON_GRD"
+            },
+            {
+              "value": 128,
+              "name": "OTHER"
+            }
+          ]
+        },
+        "sdk_control_device": {
+          "values": [
+            {
+              "value": 0,
+              "name": "RC"
+            },
+            {
+              "value": 1,
+              "name": "APP"
+            },
+            {
+              "value": 2,
+              "name": "ONBOARD_DEVICE"
+            },
+            {
+              "value": 3,
+              "name": "CAMERA"
+            },
+            {
+              "value": 128,
+              "name": "OTHER"
+            }
+          ]
+        },
+        "battery_type": {
+          "default": "SMART",
+          "values": [
+            {
+              "value": 0,
+              "name": "UNKNOWN"
+            },
+            {
+              "value": 1,
+              "name": "NONSMART"
+            },
+            {
+              "value": 2,
+              "name": "SMART"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Home",
+      "id": 2,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "latitude",
+              "format": "Double",
+              "transformation": "degrees"
+            },
+            {
+              "name": "longitude",
+              "format": "Double",
+              "transformation": "degrees"
+            },
+            {
+              "name": "altitude",
+              "format": "Single",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "ioc",
+              "format": "U16",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "is_home_record",
+                  "bits": 0,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "go_home_mode",
+                  "bits": 1
+                },
+                {
+                  "name": "aircraft_head_direction",
+                  "bits": 2
+                },
+                {
+                  "name": "is_dynamic_home_point_enabled",
+                  "bits": 3
+                },
+                {
+                  "name": "is_reach_limit_distance",
+                  "bits": 4,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_reach_limit_height",
+                  "bits": 5
+                },
+                {
+                  "name": "go_home_status",
+                  "bits": {
+                    "start": 4,
+                    "end": 6
+                  },
+                  "type": "enum",
+                  "enum_name": "go_home_status"
+                },
+                {
+                  "name": "has_go_home",
+                  "bits": 7,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "compass_cele_status",
+                  "bits": {
+                    "start": 8,
+                    "end": 9
+                  }
+                },
+                {
+                  "name": "is_compass_celeing",
+                  "bits": 10,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_beginner_mode",
+                  "bits": 11,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_ioc_enabled",
+                  "bits": 12,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "ioc_mode",
+                  "bits": {
+                    "start": 13,
+                    "end": 16
+                  },
+                  "type": "enum",
+                  "enum_name": "ioc_mode"
+                }
+              ]
+            },
+            {
+              "name": "go_home_height",
+              "format": "U16"
+            },
+            {
+              "name": "course_lock_angle",
+              "format": "S16",
+              "comment": "Is this really signed? dji-log-parse uses readShort"
+            },
+            {
+              "name": "data_recorder_status",
+              "format": "U8"
+            },
+            {
+              "name": "data_recorder_remaining_capacity",
+              "format": "U8"
+            },
+            {
+              "name": "data_recorder_remaining_time",
+              "format": "U16"
+            },
+            {
+              "name": "current_data_recorder_remaining_time",
+              "format": "U16"
+            },
+            {
+              "name": "flyc_mode",
+              "format": "U8",
+              "packed": true,
+              "comment": "dji-log-parser has another field in here called MotorEscmState which seems to conflict with the subfields.  There's also an is_wing_broken subfield whose bits are outside of the U8 here.",
+              "subfields": [
+                {
+                  "name": "is_flyc_in_simulation_mode",
+                  "bits": 0,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_flyc_in_navigation_mode",
+                  "bits": 1,
+                  "transformation": "bool"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "enums": {
+        "go_home_status": {
+          "values": [
+            {
+              "value": 0,
+              "name": "STANDBY"
+            },
+            {
+              "value": 1,
+              "name": "PREASCENDING"
+            },
+            {
+              "value": 2,
+              "name": "ALIGN"
+            },
+            {
+              "value": 3,
+              "name": "ASCENDING"
+            },
+            {
+              "value": 4,
+              "name": "CRUISE"
+            },
+            {
+              "value": 7,
+              "name": "OTHER"
+            }
+          ]
+        },
+        "ioc_mode": {
+          "values": [
+            {
+              "value": 1,
+              "name": "CourseLock"
+            },
+            {
+              "value": 2,
+              "name": "HomeLock"
+            },
+            {
+              "value": 3,
+              "name": "HotspotSurround"
+            },
+            {
+              "value": 100,
+              "name": "OTHER"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Gimbal",
+      "id": 3,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "pitch",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "roll",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  10.0
+                ]
+              }
+            },
+            {
+              "name": "yaw",
+              "format": "S16",
+              "transformation": {
+                "name": "divide_then_modulo",
+                "values": [
+                  10.0,
+                  360
+                ]
+              }
+            },
+            {
+              "name": "mode",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "mode",
+                  "bits": {
+                    "start": 6,
+                    "end": 7
+                  },
+                  "type": "enum",
+                  "enum_name": "mode"
+                },
+                {
+                  "name": "submode",
+                  "bits": {
+                    "start": 0,
+                    "end": 5
+                  }
+                }
+              ]
+            },
+            {
+              "name": "roll_adjust",
+              "format": "U8"
+            },
+            {
+              "name": "yaw_angle",
+              "format": "U8",
+              "comment": "dji-log-parser has some confusing info.  YawAngle and JoystickVerDirection and JoystickHorDirection overlap"
+            },
+            {
+              "name": "auto_calibration",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "is_pitch_in_limit",
+                  "bits": 0,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_roll_in_limit",
+                  "bits": 1,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_yaw_in_limit",
+                  "bits": 2,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_auto_calibration",
+                  "bits": 3,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "auto_calibration_result",
+                  "bits": 4,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_stuck",
+                  "bits": 6,
+                  "transformation": "bool"
+                }
+              ]
+            },
+            {
+              "name": "misc",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "version",
+                  "bits": {
+                    "start": 0,
+                    "end": 3
+                  }
+                },
+                {
+                  "name": "is_double_click",
+                  "bits": 5,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_triple_click",
+                  "bits": 6,
+                  "transformation": "bool"
+                },
+                {
+                  "name": "is_single_click",
+                  "bits": 7,
+                  "transformation": "bool"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "enums": {
+        "mode": {
+          "values": [
+            {
+              "value": 0,
+              "name": "YawNoFollow"
+            },
+            {
+              "value": 1,
+              "name": "FPV"
+            },
+            {
+              "value": 2,
+              "name": "YawFollow"
+            },
+            {
+              "value": 100,
+              "name": "OTHER"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Controller",
+      "id": 4,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "aileron",
+              "format": "U16",
+              "comment": "phantom decoder divides this value by 1024.0 then subtracts 1"
+            },
+            {
+              "name": "elevator",
+              "format": "U16",
+              "comment": "phantom decoder divides this value by 1024.0 then subtracts 1"
+            },
+            {
+              "name": "throttle",
+              "format": "U16",
+              "comment": "phantom decoder divides this value by 1024.0 then subtracts 1"
+            },
+            {
+              "name": "rudder",
+              "format": "U16",
+              "comment": "phantom decoder divides this value by 1024.0 then subtracts 1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Time",
+      "id": 5,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "unknown": true,
+              "format": "U16"
+            },
+            {
+              "name": "speed",
+              "format": "Single"
+            },
+            {
+              "name": "distance",
+              "format": "Single"
+            },
+            {
+              "name": "timestamp",
+              "format": "U64",
+              "transformation": "utc_milliseconds"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "SmartBattery",
+      "id": 8,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "useful_time",
+              "format": "U16"
+            },
+            {
+              "name": "go_home_time",
+              "format": "U16"
+            },
+            {
+              "name": "land_time",
+              "format": "U16"
+            },
+            {
+              "name": "go_home_battery",
+              "format": "U16"
+            },
+            {
+              "name": "land_battery",
+              "format": "U16"
+            },
+            {
+              "name": "safe_fly_radius",
+              "format": "Single"
+            },
+            {
+              "name": "volume_consume",
+              "format": "Single"
+            },
+            {
+              "name": "status",
+              "format": "U32",
+              "comment": "phantom-decoder calls this a U16",
+              "type": "enum",
+              "enum_name": "dji_battery_status"
+            },
+            {
+              "name": "go_home_status",
+              "format": "U8",
+              "comment": "phantom-decoder calls this a U16"
+            },
+            {
+              "name": "go_home_countdown",
+              "format": "U8",
+              "comment": "phantom-decoder calls this a U16"
+            },
+            {
+              "name": "voltage",
+              "format": "U16"
+            },
+            {
+              "name": "percent",
+              "format": "U8",
+              "comment": "This may be voltage_percent?  This field is from phantom-decoder"
+            },
+            {
+              "name": "low_warning",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "low_warning",
+                  "bits": {
+                    "start": 0,
+                    "end": 6
+                  }
+                },
+                {
+                  "name": "low_warning_go_home",
+                  "bits": 7,
+                  "transformation": "bool"
+                }
+              ]
+            },
+            {
+              "name": "serious_low_warning",
+              "format": "U8",
+              "packed": true,
+              "subfields": [
+                {
+                  "name": "serious_low_warning",
+                  "bits": {
+                    "start": 0,
+                    "end": 6
+                  }
+                },
+                {
+                  "name": "serious_low_warning_landing",
+                  "bits": 7,
+                  "transformation": "bool"
+                }
+              ]
+            },
+            {
+              "name": "voltage_percent",
+              "format": "U8",
+              "comment": "This may be percent?  This field is from dji-log-parser"
+            }
+          ]
+        }
+      ],
+      "enums": {
+        "dji_battery_status": {
+          "values": [
+            {
+              "value": 0,
+              "name": "UserBatteryReqGoHome"
+            },
+            {
+              "value": 1,
+              "name": "UserBatteryReqLand"
+            },
+            {
+              "value": 4,
+              "name": "SmartBatteryReqGoHome"
+            },
+            {
+              "value": 8,
+              "name": "SmartBatteryReqLand"
+            },
+            {
+              "value": 16,
+              "name": "MainVoltageLowGoHOme"
+            },
+            {
+              "value": 32,
+              "name": "MainVoltageLowLand"
+            },
+            {
+              "value": 64,
+              "name": "BatteryCellError"
+            },
+            {
+              "value": 128,
+              "name": "BatteryCommunicateError"
+            },
+            {
+              "value": 256,
+              "name": "VoltageLowNeedLand"
+            },
+            {
+              "value": 512,
+              "name": "BatteryTempVoltageLow"
+            },
+            {
+              "value": 1024,
+              "name": "BatteryNotReady"
+            },
+            {
+              "value": 2048,
+              "name": "BatteryFirstChargeNotFull"
+            },
+            {
+              "value": 69905,
+              "name": "OTHER"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "AppTip",
+      "id": 9,
+      "string_frame": true
+    },
+    {
+      "type": "AppWarning",
+      "id": 10,
+      "string_frame": true
+    },
+    {
+      "type": "RemoteControlGPS",
+      "id": 11,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "unknown": true,
+              "format": "U32"
+            },
+            {
+              "unknown": true,
+              "format": "U16"
+            },
+            {
+              "unknown": true,
+              "format": "U8"
+            },
+            {
+              "name": "latitude",
+              "format": "U32"
+            },
+            {
+              "name": "longitude",
+              "format": "U32"
+            },
+            {
+              "name": "x_speed",
+              "format": "U32",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  1000.0
+                ]
+              }
+            },
+            {
+              "name": "y_speed",
+              "format": "U32",
+              "transformation": {
+                "name": "divide_by",
+                "values": [
+                  1000.0
+                ]
+              }
+            },
+            {
+              "name": "gps_number",
+              "format": "U8"
+            },
+            {
+              "name": "gps_staus",
+              "format": "U16",
+              "transformation": "bool"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Recover",
+      "id": 13,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "drone_type",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "drone_type",
+              "comment": "TODO: Make a global enum for drone type"
+            },
+            {
+              "name": "app_type",
+              "format": "U8",
+              "type": "enum",
+              "enum_name": "app_type"
+            },
+            {
+              "name": "version_major",
+              "format": "U8"
+            },
+            {
+              "name": "version_minor",
+              "format": "U8"
+            },
+            {
+              "name": "version_patch",
+              "format": "U8"
+            },
+            {
+              "name": "aircraft_serial_number",
+              "format": {
+                "type": "String",
+                "length": 10
+              }
+            },
+            {
+              "name": "aircraft_name",
+              "format": {
+                "type": "String",
+                "length": 24
+              }
+            },
+            {
+              "name": "active_timestamp",
+              "format": "U64",
+              "transformation": "utc_milliseconds",
+              "comment": "dji-log-parser doesn't treat this as milliseconds."
+            },
+            {
+              "name": "camera_serial_number",
+              "format": {
+                "type": "String",
+                "length": 10
+              }
+            },
+            {
+              "name": "remote_control_serial_number",
+              "format": {
+                "type": "String",
+                "length": 10
+              }
+            },
+            {
+              "name": "battery_serial_number",
+              "format": {
+                "type": "String",
+                "length": 10
+              },
+              "comment": "dji-log-parser treats the length as 85.  This is at offset 75, so this should probably really be length 10."
+            }
+          ]
+        }
+      ],
+      "enums": {
+        "drone_type": {
+          "values": [
+            {
+              "value": 0,
+              "name": "Unknown"
+            },
+            {
+              "value": 1,
+              "name": "Inspire"
+            },
+            {
+              "value": 2,
+              "name": "P3S"
+            },
+            {
+              "value": 3,
+              "name": "P3X"
+            },
+            {
+              "value": 4,
+              "name": "P3C"
+            },
+            {
+              "value": 5,
+              "name": "OpenFrame"
+            },
+            {
+              "value": 7,
+              "name": "P4"
+            },
+            {
+              "value": 13,
+              "name": "Mavic"
+            },
+            {
+              "value": 100,
+              "name": "NONE"
+            }
+          ]
+        },
+        "app_type": {
+          "values": [
+            {
+              "value": 0,
+              "name": "UNKNOWN"
+            },
+            {
+              "value": 1,
+              "name": "IOS"
+            },
+            {
+              "value": 2,
+              "name": "ANDROID"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "type": "ApplicationGPS",
+      "id": 14,
+      "field_definitions": [
+        {
+          "fields": [
+            {
+              "name": "longitude",
+              "format": "Double",
+              "comment": "This is odd: latitude normally comes first, and it's normally transformed to degreees.  dji-log-parser doesn't do that."
+            },
+            {
+              "name": "latitude",
+              "format": "Double",
+              "comment": "This is odd: latitude normally comes first, and it's normally transformed to degreees.  dji-log-parser doesn't do that."
+            },
+            {
+              "name": "accuracy",
+              "format": "Single"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
