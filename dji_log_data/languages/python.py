@@ -1,6 +1,4 @@
-import os
-
-from . import Language
+from .LanguageBase import Language
 
 class Python(Language):
 
@@ -27,7 +25,7 @@ class Python(Language):
         'S64':    'q'
     }
 
-    def __init__(self, frames_file, keys_file, template_directory):
+    def __init__(self):
         filters = {
             'format_to_struct_type': self.format_to_struct_type,
             'apply_transformation': self.apply_transformation,
@@ -36,11 +34,8 @@ class Python(Language):
             'pascal_case': self.pascal_case,
         }
         super(Python, self).__init__(
-            frames_file=frames_file,
-            keys_file=keys_file,
-            frames_template='frames.py',
-            keys_template='keys.py',
-            template_directory=os.path.join(template_directory, 'python'),
+            frames_template='python/frames.py',
+            keys_template='python/keys.py',
             environment_args={'lstrip_blocks': True, 'trim_blocks': True},
             additional_filters=filters)
 

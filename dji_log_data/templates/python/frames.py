@@ -43,7 +43,7 @@ class UnrecognizedFrame(Frame):
 
 {% for frame_data in data.frame_types %}
 
-{% include 'frame.py' %}
+{% include 'python/frame.py' %}
 
 {% endfor %}
 
