@@ -1,0 +1,2 @@
+include dji_log_data/data/*
+recursive-include dji_log_data/templates *.*
